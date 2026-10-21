@@ -491,19 +491,19 @@ input, textarea, select {
 
 /* Background images for each institution card */
 .ql-card-farm {
-  background: url('/farm school demo farm.jpeg') center center / cover no-repeat;
+  background: url('/farm-school-demo-farm.jpeg') center center / cover no-repeat;
 }
 
 .ql-card-health {
-  background: url('/hc reception.jpeg') center center / cover no-repeat;
+  background: url('/hc-reception.jpeg') center center / cover no-repeat;
 }
 
 .ql-card-accommodation {
-  background: url('/inn extrances.jpeg') center center / cover no-repeat;
+  background: url('/inn-extrances.jpeg') center center / cover no-repeat;
 }
 
 .ql-card-organisations {
-  background: url('/parish gorotto.jpeg') center center / cover no-repeat;
+  background: url('/parish-gorotto.jpeg') center center / cover no-repeat;
 }
 
 /* Dark overlay on background images */
@@ -1882,7 +1882,7 @@ input, textarea, select {
 }
 
 .parish-bg {
-  background: url('/parish church.jpeg') center/cover no-repeat;
+  background: url('/parish-church.jpeg') center/cover no-repeat;
 }
 .parish-bg::before {
   content: '';
@@ -1894,7 +1894,7 @@ input, textarea, select {
 }
 
 .farm-bg {
-  background: url('/farm school demo farm.jpeg') center/cover no-repeat;
+  background: url('/farm-school-demo-farm.jpeg') center/cover no-repeat;
 }
 .farm-bg::before {
   content: '';
@@ -1906,7 +1906,7 @@ input, textarea, select {
 }
 
 .health-bg {
-  background: url('/hc reception.jpeg') center/cover no-repeat;
+  background: url('/hc-reception.jpeg') center/cover no-repeat;
 }
 .health-bg::before {
   content: '';
@@ -1918,7 +1918,7 @@ input, textarea, select {
 }
 
 .accommodation-bg {
-  background: url('/inn extrances.jpeg') center/cover no-repeat;
+  background: url('/inn-extrances.jpeg') center/cover no-repeat;
 }
 .accommodation-bg::before {
   content: '';
@@ -1930,7 +1930,7 @@ input, textarea, select {
 }
 
 .community-bg {
-  background: url('/parish gorotto.jpeg') center/cover no-repeat;
+  background: url('/parish-gorotto.jpeg') center/cover no-repeat;
 }
 .community-bg::before {
   content: '';
@@ -1942,7 +1942,7 @@ input, textarea, select {
 }
 
 .celebration-bg {
-  background: url('/parish church 2.jpeg') center/cover no-repeat;
+  background: url('/parish-church-2.jpeg') center/cover no-repeat;
 }
 .celebration-bg::before {
   content: '';
@@ -1954,7 +1954,7 @@ input, textarea, select {
 }
 
 .training-bg {
-  background: url('/farm school side view.jpeg') center/cover no-repeat;
+  background: url('/farm-school-side-view.jpeg') center/cover no-repeat;
 }
 .training-bg::before {
   content: '';
@@ -1966,7 +1966,7 @@ input, textarea, select {
 }
 
 .outreach-bg {
-  background: url('/hc immunazation.jpeg') center/cover no-repeat;
+  background: url('/hc-immunazation.jpeg') center/cover no-repeat;
 }
 .outreach-bg::before {
   content: '';
@@ -2226,31 +2226,31 @@ input, textarea, select {
 
 /* Background images for each donate card */
 .donate-card-parish {
-  background: url('/parish church.jpeg') center center / cover no-repeat;
+  background: url('/parish-church.jpeg') center center / cover no-repeat;
 }
 
 .donate-card-farm {
-  background: url('/farm school demo farm.jpeg') center center / cover no-repeat;
+  background: url('/farm-school-demo-farm.jpeg') center center / cover no-repeat;
 }
 
 .donate-card-health {
-  background: url('/hc reception.jpeg') center center / cover no-repeat;
+  background: url('/hc-reception.jpeg') center center / cover no-repeat;
 }
 
 .donate-card-inn {
-  background: url('/inn extrances.jpeg') center center / cover no-repeat;
+  background: url('/inn-extrances.jpeg') center center / cover no-repeat;
 }
 
 .donate-card-organisations {
-  background: url('/parish gorotto.jpeg') center center / cover no-repeat;
+  background: url('/parish-gorotto.jpeg') center center / cover no-repeat;
 }
 
 .donate-card-education {
-  background: url('/farm school side view.jpeg') center center / cover no-repeat;
+  background: url('/farm-school-side-view.jpeg') center center / cover no-repeat;
 }
 
 .donate-card-community {
-  background: url('/parish offices.jpeg') center center / cover no-repeat;
+  background: url('/parish-offices.jpeg') center center / cover no-repeat;
 }
 
 /* Dark overlay on background images */
