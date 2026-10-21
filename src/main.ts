@@ -11,7 +11,6 @@ window.addEventListener('scroll', () => {
   } else {
     navbar.classList.remove('scrolled');
   }
-  updateActiveNavLink();
   updateBackToTop();
 });
 
@@ -29,34 +28,14 @@ navLinkElements.forEach(link => {
   });
 });
 
-// Active nav link on scroll
-function updateActiveNavLink(): void {
-  const sections = document.querySelectorAll('section[id]');
-  const scrollPos = window.scrollY + 100;
-
-  sections.forEach(section => {
-    const top = (section as HTMLElement).offsetTop;
-    const height = (section as HTMLElement).offsetHeight;
-    const id = section.getAttribute('id')!;
-
-    if (scrollPos >= top && scrollPos < top + height) {
-      navLinkElements.forEach(link => {
-        link.classList.remove('active');
-        if ((link as HTMLAnchorElement).getAttribute('href') === `#${id}`) {
-          link.classList.add('active');
-        }
-      });
-    }
-  });
-}
-
-// ===== Smooth Scroll =====
+// ===== Smooth Scroll for anchor links (within-page) =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', (e) => {
-    e.preventDefault();
     const targetId = (anchor as HTMLAnchorElement).getAttribute('href')!;
+    if (targetId === '#') return;
     const target = document.querySelector(targetId);
     if (target) {
+      e.preventDefault();
       const offset = 80;
       const top = (target as HTMLElement).offsetTop - offset;
       window.scrollTo({ top, behavior: 'smooth' });
@@ -182,5 +161,4 @@ fadeElements.forEach(el => {
 });
 
 // ===== Initialize =====
-updateActiveNavLink();
 updateBackToTop();

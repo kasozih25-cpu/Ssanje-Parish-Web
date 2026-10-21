@@ -468,13 +468,19 @@ input, textarea, select {
 }
 
 .ql-card {
+  position: relative;
   background: var(--bg-card);
-  padding: 32px 24px;
+  padding: 0;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   transition: var(--transition);
   text-align: center;
   border: 2px solid transparent;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 320px;
 }
 
 .ql-card:hover {
@@ -483,28 +489,66 @@ input, textarea, select {
   border-color: var(--accent);
 }
 
-.ql-icon {
-  font-size: 3rem;
-  margin-bottom: 16px;
+/* Background images for each institution card */
+.ql-card-farm {
+  background: url('/farm school demo farm.jpeg') center center / cover no-repeat;
+}
+
+.ql-card-health {
+  background: url('/hc reception.jpeg') center center / cover no-repeat;
+}
+
+.ql-card-accommodation {
+  background: url('/inn extrances.jpeg') center center / cover no-repeat;
+}
+
+.ql-card-organisations {
+  background: url('/parish gorotto.jpeg') center center / cover no-repeat;
+}
+
+/* Dark overlay on background images */
+.ql-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.2) 100%);
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.ql-card:hover .ql-card-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+/* Content positioned over the overlay */
+.ql-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 32px 24px;
 }
 
 .ql-card h3 {
-  font-size: 1.2rem;
-  color: var(--accent-dark);
+  font-size: 1.3rem;
+  color: #ffffff;
   margin-bottom: 12px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .ql-card p {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 16px;
   line-height: 1.6;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .ql-arrow {
-  color: var(--accent);
+  color: var(--gold);
   font-weight: 600;
   font-size: 0.9rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* ===== About Section ===== */
@@ -862,7 +906,7 @@ input, textarea, select {
 }
 
 .hc-image {
-  max-width: 600px;
+  max-width: 300px;
   width: 100%;
   margin: 0 auto;
   border-radius: var(--radius-lg);
@@ -923,12 +967,6 @@ input, textarea, select {
   box-shadow: var(--shadow-lg);
 }
 
-.si-icon {
-  font-size: 2rem;
-  margin-bottom: 12px;
-  display: block;
-}
-
 .service-item h4 {
   font-size: 1.05rem;
   color: var(--accent-dark);
@@ -987,6 +1025,52 @@ input, textarea, select {
   color: var(--text-secondary);
   line-height: 1.7;
   margin-bottom: 4px;
+}
+
+/* ===== Health Centre Sub-navigation Tabs ===== */
+.hc-sub-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+  background: var(--bg-card);
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.hc-tab {
+  padding: 12px 28px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  background: var(--bg-secondary);
+  transition: var(--transition);
+  border: 2px solid transparent;
+}
+
+.hc-tab:hover {
+  color: var(--accent);
+  background: var(--bg-primary);
+  border-color: var(--accent-light);
+}
+
+.hc-tab.active {
+  color: white;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.hc-subpage {
+  animation: fadeInSubpage 0.3s ease-in-out;
+}
+
+@keyframes fadeInSubpage {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ===== Accommodation Section ===== */
@@ -1052,10 +1136,6 @@ input, textarea, select {
 .facility-item:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-}
-
-.fi-icon {
-  font-size: 2rem;
 }
 
 .facility-item span:last-child {
@@ -1223,19 +1303,23 @@ input, textarea, select {
   line-height: 1.8;
 }
 
-.gfdi-values,
-.gfdi-goal,
-.gfdi-objectives,
-.gfdi-programs,
-.gfdi-involve {
+/* ===== Core Values & Overall Goal Box ===== */
+.org-values-goal {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
   margin-bottom: 48px;
+  border: 2px solid var(--border);
 }
 
-.gfdi-values h3,
-.gfdi-goal h3,
-.gfdi-objectives h3,
-.gfdi-programs h3,
-.gfdi-involve h3 {
+.vg-values {
+  padding: 40px 40px 32px;
+  background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+  border-bottom: 2px solid var(--border);
+}
+
+.vg-values h3 {
   font-size: 1.5rem;
   color: var(--accent-dark);
   margin-bottom: 24px;
@@ -1249,7 +1333,7 @@ input, textarea, select {
 }
 
 .value-item {
-  background: var(--bg-secondary);
+  background: var(--bg-card);
   padding: 20px;
   border-radius: var(--radius);
   text-align: center;
@@ -1257,20 +1341,54 @@ input, textarea, select {
   color: var(--accent-dark);
   font-size: 0.95rem;
   transition: var(--transition);
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--accent);
 }
 
 .value-item:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-lg);
 }
 
-.gfdi-goal p {
+.vg-goal {
+  padding: 32px 40px 40px;
+  background: linear-gradient(135deg, #fff8e1, #fff3e0);
+  text-align: center;
+}
+
+.vg-goal h3 {
+  font-size: 1.5rem;
+  color: var(--accent-dark);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.vg-goal p {
   text-align: center;
   font-size: 1.1rem;
   color: var(--text-secondary);
   line-height: 1.8;
   max-width: 800px;
   margin: 0 auto;
+  font-style: italic;
+}
+
+/* ===== Objectives Box ===== */
+.org-objectives {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 40px;
+  margin-bottom: 48px;
+  border: 2px solid var(--border);
+  border-left: 6px solid var(--accent);
+}
+
+.org-objectives h3 {
+  font-size: 1.5rem;
+  color: var(--accent-dark);
+  margin-bottom: 24px;
+  text-align: center;
 }
 
 .objectives-list {
@@ -1281,11 +1399,22 @@ input, textarea, select {
 }
 
 .objectives-list li {
-  padding: 12px 16px 12px 36px;
+  padding: 14px 16px 14px 40px;
   position: relative;
   color: var(--text-secondary);
   line-height: 1.7;
   font-size: 0.95rem;
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.objectives-list li:last-child {
+  border-bottom: none;
+}
+
+.objectives-list li:hover {
+  background: var(--bg-secondary);
+  border-radius: var(--radius);
 }
 
 .objectives-list li::before {
@@ -1294,6 +1423,21 @@ input, textarea, select {
   left: 12px;
   color: var(--accent);
   font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Keep programs and involve styles */
+.gfdi-programs,
+.gfdi-involve {
+  margin-bottom: 48px;
+}
+
+.gfdi-programs h3,
+.gfdi-involve h3 {
+  font-size: 1.5rem;
+  color: var(--accent-dark);
+  margin-bottom: 24px;
+  text-align: center;
 }
 
 .programs-grid {
@@ -1313,11 +1457,6 @@ input, textarea, select {
 .program-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-}
-
-.program-icon {
-  font-size: 2.5rem;
-  margin-bottom: 16px;
 }
 
 .program-card h4 {
@@ -1368,6 +1507,167 @@ input, textarea, select {
   font-size: 0.95rem;
   color: var(--text-secondary);
   line-height: 1.6;
+}
+
+/* ===== Organisation Parent / Child / Connection ===== */
+.org-parent,
+.org-child {
+  background: var(--bg-card);
+  padding: 48px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  margin-bottom: 32px;
+}
+
+.org-parent {
+  border-left: 5px solid #4a148c;
+}
+
+.org-child {
+  border-left: 5px solid var(--accent);
+  margin-left: 32px;
+}
+
+.org-parent-content h3,
+.org-child-content h3 {
+  font-size: 1.6rem;
+  color: var(--accent-dark);
+  margin-bottom: 8px;
+}
+
+.org-tagline {
+  font-style: italic;
+  color: #4a148c;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.org-subtag {
+  font-style: italic;
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.org-parent-content p,
+.org-child-content p {
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+.org-connection {
+  background: linear-gradient(135deg, #4a148c, #00695c);
+  color: white;
+  padding: 32px 40px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.connection-content h4 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: white;
+}
+
+.connection-content p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Organisation Hub Page Cards */
+.org-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.org-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.org-card {
+  background: var(--bg-card);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--accent);
+  transition: var(--transition);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.org-card-link:hover .org-card {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-left-color: var(--primary);
+}
+
+.org-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.org-card .org-tagline {
+  font-style: italic;
+  color: var(--accent);
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.org-card .org-subtag {
+  font-style: italic;
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.org-card p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.org-card-cta {
+  display: inline-block;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.org-card-link:hover .org-card-cta {
+  color: var(--primary);
+}
+
+.org-quick-links {
+  margin-bottom: 32px;
+}
+
+.org-quick-links h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.org-quick-links .involve-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 /* ===== News Section ===== */
@@ -1548,13 +1848,16 @@ input, textarea, select {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
+  font-weight: 700;
   color: white;
-  font-size: 1rem;
+  text-decoration: none;
+  font-size: 1.05rem;
   cursor: pointer;
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  z-index: 1;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 
 .gallery-item::after {
@@ -1567,6 +1870,7 @@ input, textarea, select {
   background: rgba(0,0,0,0.3);
   opacity: 0;
   transition: var(--transition);
+  z-index: 2;
 }
 
 .gallery-item:hover::after {
@@ -1577,14 +1881,134 @@ input, textarea, select {
   transform: scale(1.05);
 }
 
-.parish-bg { background: linear-gradient(135deg, #2d6a4f, #40916c); }
-.farm-bg { background: linear-gradient(135deg, #8b6f47, #a68520); }
-.health-bg { background: linear-gradient(135deg, #1565c0, #42a5f5); }
-.accommodation-bg { background: linear-gradient(135deg, #7b1fa2, #ab47bc); }
-.community-bg { background: linear-gradient(135deg, #e65100, #ff9800); }
-.celebration-bg { background: linear-gradient(135deg, #c62828, #ef5350); }
-.training-bg { background: linear-gradient(135deg, #00695c, #26a69a); }
-.outreach-bg { background: linear-gradient(135deg, #4527a0, #7e57c2); }
+.parish-bg {
+  background: url('/parish church.jpeg') center/cover no-repeat;
+}
+.parish-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(45,106,79,0.75), rgba(64,145,108,0.6));
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.farm-bg {
+  background: url('/farm school demo farm.jpeg') center/cover no-repeat;
+}
+.farm-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(139,111,71,0.75), rgba(166,133,32,0.6));
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.health-bg {
+  background: url('/hc reception.jpeg') center/cover no-repeat;
+}
+.health-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(21,101,192,0.75), rgba(66,165,245,0.6));
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.accommodation-bg {
+  background: url('/inn extrances.jpeg') center/cover no-repeat;
+}
+.accommodation-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(123,31,162,0.75), rgba(171,71,188,0.6));
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.community-bg {
+  background: url('/parish gorotto.jpeg') center/cover no-repeat;
+}
+.community-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(230,81,0,0.75), rgba(255,152,0,0.6));
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.celebration-bg {
+  background: url('/parish church 2.jpeg') center/cover no-repeat;
+}
+.celebration-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(198,40,40,0.75), rgba(239,83,80,0.6));
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.training-bg {
+  background: url('/farm school side view.jpeg') center/cover no-repeat;
+}
+.training-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,105,92,0.75), rgba(38,166,154,0.6));
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.outreach-bg {
+  background: url('/hc immunazation.jpeg') center/cover no-repeat;
+}
+.outreach-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(69,39,160,0.75), rgba(126,87,194,0.6));
+  border-radius: inherit;
+  z-index: 0;
+}
+
+/* Photo Gallery Styles */
+.photo-gallery {
+  margin-top: 40px;
+}
+
+.photo-gallery h3 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.photo-grid img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.photo-grid img:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
 
 .video-grid {
   display: grid;
@@ -1781,34 +2205,89 @@ input, textarea, select {
 }
 
 .donate-card {
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  padding: 24px;
+  position: relative;
+  background: var(--bg-card);
+  padding: 0;
   border-radius: var(--radius);
-  text-align: center;
   transition: var(--transition);
+  text-align: center;
   border: 1px solid rgba(255,255,255,0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 280px;
 }
 
 .donate-card:hover {
-  background: rgba(255,255,255,0.2);
   transform: translateY(-4px);
+  border-color: var(--gold);
 }
 
-.donate-icon {
-  font-size: 2.5rem;
-  margin-bottom: 12px;
+/* Background images for each donate card */
+.donate-card-parish {
+  background: url('/parish church.jpeg') center center / cover no-repeat;
+}
+
+.donate-card-farm {
+  background: url('/farm school demo farm.jpeg') center center / cover no-repeat;
+}
+
+.donate-card-health {
+  background: url('/hc reception.jpeg') center center / cover no-repeat;
+}
+
+.donate-card-inn {
+  background: url('/inn extrances.jpeg') center center / cover no-repeat;
+}
+
+.donate-card-organisations {
+  background: url('/parish gorotto.jpeg') center center / cover no-repeat;
+}
+
+.donate-card-education {
+  background: url('/farm school side view.jpeg') center center / cover no-repeat;
+}
+
+.donate-card-community {
+  background: url('/parish offices.jpeg') center center / cover no-repeat;
+}
+
+/* Dark overlay on background images */
+.donate-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.2) 100%);
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.donate-card:hover .donate-card-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+/* Content positioned over the overlay */
+.donate-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 24px;
 }
 
 .donate-card h4 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  color: #ffffff;
   margin-bottom: 8px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .donate-card p {
   font-size: 0.9rem;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.6;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .donate-methods {
@@ -2105,6 +2584,18 @@ input, textarea, select {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .ql-card {
+    min-height: 260px;
+  }
+
+  .ql-card-content {
+    padding: 24px 18px;
+  }
+
+  .ql-card h3 {
+    font-size: 1.15rem;
+  }
+
   .about-grid {
     grid-template-columns: 1fr;
   }
@@ -2127,6 +2618,18 @@ input, textarea, select {
 
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .donate-card {
+    min-height: 240px;
+  }
+
+  .donate-card-content {
+    padding: 20px 16px;
+  }
+
+  .donate-card h4 {
+    font-size: 1.1rem;
   }
 }
 
@@ -2187,6 +2690,22 @@ input, textarea, select {
     grid-template-columns: 1fr;
   }
 
+  .ql-card {
+    min-height: 240px;
+  }
+
+  .ql-card-content {
+    padding: 24px 16px;
+  }
+
+  .ql-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .ql-card p {
+    font-size: 0.85rem;
+  }
+
   .mission-vision {
     grid-template-columns: 1fr;
   }
@@ -2201,6 +2720,16 @@ input, textarea, select {
 
   .hc-info-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hc-sub-nav {
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .hc-tab {
+    padding: 10px 16px;
+    font-size: 0.9rem;
   }
 
   .rooms-grid {
@@ -2220,6 +2749,10 @@ input, textarea, select {
   }
 
   .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .photo-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -2259,8 +2792,55 @@ input, textarea, select {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .vg-values,
+  .vg-goal {
+    padding: 24px 20px;
+  }
+
+  .org-objectives {
+    padding: 24px 20px;
+  }
+
+  .org-parent,
+  .org-child {
+    padding: 24px;
+    margin-left: 0;
+  }
+
+  .org-connection {
+    padding: 24px 20px;
+  }
+
+  .org-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .org-card {
+    padding: 24px;
+  }
+
   .contact-form {
     padding: 24px;
+  }
+
+  .donate-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .donate-card {
+    min-height: 220px;
+  }
+
+  .donate-card-content {
+    padding: 18px 14px;
+  }
+
+  .donate-card h4 {
+    font-size: 1.05rem;
+  }
+
+  .donate-card p {
+    font-size: 0.85rem;
   }
 }
 
@@ -2281,6 +2861,10 @@ input, textarea, select {
     grid-template-columns: 1fr;
   }
 
+  .photo-grid {
+    grid-template-columns: 1fr;
+  }
+
   .involve-grid {
     grid-template-columns: 1fr;
   }
@@ -2288,5 +2872,83 @@ input, textarea, select {
   .demo-grid,
   .livestock-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .org-parent,
+  .org-child {
+    padding: 20px;
+  }
+
+  .org-parent-content h3,
+  .org-child-content h3 {
+    font-size: 1.3rem;
+  }
+
+  .connection-content h4 {
+    font-size: 1.1rem;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vg-values,
+  .vg-goal {
+    padding: 20px 16px;
+  }
+
+  .vg-values h3,
+  .vg-goal h3 {
+    font-size: 1.3rem;
+  }
+
+  .org-objectives {
+    padding: 20px 16px;
+  }
+
+  .org-objectives h3 {
+    font-size: 1.3rem;
+  }
+
+  .org-card {
+    padding: 20px;
+  }
+
+  .org-card h3 {
+    font-size: 1.15rem;
+  }
+
+  .org-quick-links h3 {
+    font-size: 1.3rem;
+  }
+
+  .hc-sub-nav {
+    gap: 6px;
+    padding: 10px;
+  }
+
+  .hc-tab {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .donate-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .donate-card {
+    min-height: 200px;
+  }
+
+  .donate-card-content {
+    padding: 16px 12px;
+  }
+
+  .donate-card h4 {
+    font-size: 1rem;
+  }
+
+  .donate-card p {
+    font-size: 0.8rem;
   }
 }
