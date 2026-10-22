@@ -50,6 +50,14 @@ navLinkElements.forEach(link => {
   });
 });
 
+// Close mobile menu on bottom nav link click
+const bottomNavLinks = document.querySelectorAll('.bottom-nav-link');
+bottomNavLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    closeMobileMenu();
+  });
+});
+
 // Close mobile menu on Escape key
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && navLinks.classList.contains('open')) {

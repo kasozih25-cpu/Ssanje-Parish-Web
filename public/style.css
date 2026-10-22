@@ -49,6 +49,72 @@ a {
   transition: var(--transition);
 }
 
+/* Make internal links more visible */
+a[href^="http"],
+a[href^="mailto:"],
+a[href^="tel:"] {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(45, 106, 79, 0.3);
+  text-underline-offset: 2px;
+}
+
+a[href^="http"]:hover,
+a[href^="mailto:"]:hover,
+a[href^="tel:"]:hover {
+  color: var(--accent-dark);
+  text-decoration-color: var(--accent);
+}
+
+/* Internal page links - subtle underline on hover */
+a[href^="index.html"],
+a[href^="about.html"],
+a[href^="farm-school.html"],
+a[href^="health-centre"],
+a[href^="accommodation.html"],
+a[href^="organisations"],
+a[href^="news.html"],
+a[href^="media.html"],
+a[href^="partners.html"],
+a[href^="donate.html"],
+a[href^="contact.html"] {
+  text-decoration: none;
+}
+
+/* Footer links */
+.footer-links a {
+  color: var(--text-secondary);
+  padding: 4px 0;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+/* Quick link cards - make them more obviously clickable */
+.ql-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ql-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Gallery items - clickable feedback */
+.gallery-item {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+}
+
 ul {
   list-style: none;
 }
@@ -228,20 +294,28 @@ input, textarea, select {
   font-weight: 500;
   color: var(--text-secondary);
   position: relative;
-  padding: 4px 0;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
-.nav-link:hover,
+.nav-link:hover {
+  color: var(--accent);
+  background: rgba(45, 106, 79, 0.06);
+}
+
 .nav-link.active {
   color: var(--accent);
+  font-weight: 600;
+  background: rgba(45, 106, 79, 0.08);
 }
 
 .nav-link.active::after {
   content: '';
   position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
+  bottom: 0;
+  left: 8px;
+  right: 8px;
   height: 2px;
   background: var(--gold);
   border-radius: 1px;
@@ -973,6 +1047,82 @@ input, textarea, select {
 .nav-overlay.active {
   display: block;
   opacity: 1;
+}
+
+/* ===== Bottom Navigation Bar (Mobile Only) ===== */
+.bottom-nav {
+  display: none;
+}
+
+.bottom-nav-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+.bottom-nav-list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.bottom-nav-item {
+  flex: 1;
+  text-align: center;
+}
+
+.bottom-nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 4px 6px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: 0.7rem;
+  font-weight: 500;
+  gap: 2px;
+  min-height: 50px;
+}
+
+.bottom-nav-link:hover,
+.bottom-nav-link.active {
+  color: var(--accent);
+  background: rgba(45, 106, 79, 0.05);
+}
+
+.bottom-nav-link.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.bottom-nav-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  margin-bottom: 1px;
+}
+
+.bottom-nav-label {
+  font-size: 0.65rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Safe area padding for phones with home indicator */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .bottom-nav-container {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
 
 .hc-intro {
@@ -2698,6 +2848,16 @@ input, textarea, select {
 }
 
 @media (max-width: 768px) {
+  /* Show bottom navigation on mobile */
+  .bottom-nav {
+    display: block;
+  }
+
+  /* Add padding to body so content isn't hidden behind bottom nav */
+  body {
+    padding-bottom: 60px;
+  }
+
   .nav-toggle {
     display: flex;
     z-index: 1002;
@@ -3101,6 +3261,137 @@ input, textarea, select {
   .nav-link {
     padding: 14px 16px;
     font-size: 1.05rem;
+    display: block;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Make all links more visible on mobile */
+  a {
+    min-height: 44px;
+  }
+
+  /* Make inline links more visible on mobile */
+  p a,
+  li a,
+  td a {
+    color: var(--accent);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: rgba(45, 106, 79, 0.4);
+    text-underline-offset: 2px;
+  }
+
+  p a:hover,
+  li a:hover,
+  td a:hover {
+    color: var(--accent-dark);
+  }
+
+  /* Quick link cards - more obvious on mobile */
+  .ql-card {
+    min-height: 280px;
+    position: relative;
+  }
+
+  .ql-card::after {
+    content: '→';
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    z-index: 3;
+    transition: transform 0.2s ease;
+  }
+
+  .ql-card:hover::after {
+    transform: translateX(4px);
+  }
+
+  /* Gallery items - tap feedback on mobile */
+  .gallery-item:active {
+    transform: scale(0.98);
+  }
+
+  /* Bottom nav - active indicator */
+  .bottom-nav-link.active {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .bottom-nav-link.active .bottom-nav-icon {
+    transform: scale(1.1);
+  }
+
+  .bottom-nav-link:active {
+    background: rgba(45, 106, 79, 0.1);
+    transform: scale(0.95);
+  }
+
+  /* Buttons - larger touch targets on mobile */
+  .btn {
+    min-height: 48px;
+    padding: 14px 28px;
+    font-size: 1rem;
+  }
+
+  /* Footer links - more visible on mobile */
+  .footer-links a {
+    padding: 8px 0;
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .footer-links a:last-child {
+    border-bottom: none;
+  }
+
+  .footer-links a:active {
+    color: var(--accent);
+    background: rgba(45, 106, 79, 0.05);
+  }
+
+  /* Sub-page nav tabs - more visible on mobile */
+  .hc-tab,
+  .org-tab {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .hc-tab.active,
+  .org-tab.active {
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+  }
+
+  /* Donate cards - tap feedback */
+  .donate-card:active {
+    transform: scale(0.98);
+  }
+
+  /* Table links - more visible */
+  table a {
+    color: var(--accent);
+    font-weight: 500;
+    text-decoration: underline;
+  }
+
+  /* Form elements - larger touch targets */
+  input,
+  textarea,
+  select,
+  button {
+    font-size: 16px !important;
   }
 
   /* Quick info bar - horizontal scroll on small mobile */
