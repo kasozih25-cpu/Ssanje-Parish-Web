@@ -107,24 +107,46 @@ filterBtns.forEach(btn => {
 const mediaTabs = document.querySelectorAll('.media-tab');
 const mediaContents = document.querySelectorAll('.media-content');
 
-mediaTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    // Update active tab
-    mediaTabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-
-    const tabName = tab.getAttribute('data-tab');
-
-    mediaContents.forEach(content => {
-      content.classList.remove('active');
-    });
-
-    const targetContent = document.getElementById(`media-${tabName}`);
-    if (targetContent) {
-      targetContent.classList.add('active');
+function activateMediaTab(tabName: string): void {
+  mediaTabs.forEach(t => {
+    t.classList.remove('active');
+    if (t.getAttribute('data-tab') === tabName) {
+      t.classList.add('active');
     }
   });
+
+  mediaContents.forEach(content => {
+    content.classList.remove('active');
+  });
+
+  const targetContent = document.getElementById(`media-${tabName}`);
+  if (targetContent) {
+    targetContent.classList.add('active');
+  }
+}
+
+mediaTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const tabName = tab.getAttribute('data-tab');
+    activateMediaTab(tabName!);
+  });
 });
+
+// Activate tab based on URL hash (e.g. media.html#documents)
+if (mediaTabs.length > 0 && window.location.hash) {
+  const hashTab = window.location.hash.replace('#', '');
+  const matchingTab = document.querySelector(`.media-tab[data-tab="${hashTab}"]`);
+  if (matchingTab) {
+    activateMediaTab(hashTab);
+    // Scroll to media content after a short delay
+    setTimeout(() => {
+      const targetContent = document.getElementById(`media-${hashTab}`);
+      if (targetContent) {
+        targetContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  }
+}
 
 // ===== Contact Form =====
 const contactForm = document.getElementById('contact-form') as HTMLFormElement;

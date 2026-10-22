@@ -517,6 +517,15 @@ input, textarea, select {
   flex-shrink: 0;
 }
 
+.qi-priest-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  flex-shrink: 0;
+}
+
 .quick-info-item h4 {
   font-size: 0.9rem;
   color: var(--accent-dark);
@@ -721,7 +730,12 @@ input, textarea, select {
 }
 
 .priest-avatar {
-  font-size: 2.5rem;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  flex-shrink: 0;
 }
 
 .priest-profile h4 {
@@ -3569,6 +3583,11 @@ input, textarea, select {
 
   .qi-icon {
     font-size: 1.5rem;
+  }
+
+  .qi-priest-photo {
+    width: 40px;
+    height: 40px;
   }
 
   /* Better footer on small screens */
