@@ -913,6 +913,68 @@ input, textarea, select {
   box-shadow: var(--shadow-lg);
 }
 
+/* Health Centre Hero Banner */
+.hc-hero-banner {
+  position: relative;
+  width: 100%;
+  max-height: 450px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  margin-bottom: 48px;
+  box-shadow: var(--shadow-lg);
+}
+
+.hc-hero-image {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  display: block;
+}
+
+.hc-hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  padding: 40px 32px 32px;
+  z-index: 1;
+}
+
+.hc-hero-content h3 {
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}
+
+.hc-hero-content p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  margin: 0;
+}
+
+/* Mobile Navigation Overlay */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
 .hc-intro {
   background: var(--bg-card);
   padding: 48px;
@@ -1038,6 +1100,8 @@ input, textarea, select {
   padding: 16px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .hc-tab {
@@ -2636,26 +2700,47 @@ input, textarea, select {
 @media (max-width: 768px) {
   .nav-toggle {
     display: flex;
+    z-index: 1002;
   }
 
   .nav-links {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 80%;
-    max-width: 300px;
+    width: 85%;
+    max-width: 320px;
     height: 100vh;
     background: white;
     flex-direction: column;
     padding: 80px 24px 24px;
     box-shadow: var(--shadow-lg);
     transition: var(--transition);
-    gap: 16px;
+    gap: 8px;
     z-index: 1001;
+    overflow-y: auto;
+    align-items: stretch;
   }
 
   .nav-links.open {
     right: 0;
+  }
+
+  .nav-link {
+    padding: 12px 16px;
+    font-size: 1rem;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: rgba(0, 128, 0, 0.08);
+  }
+
+  .nav-cta {
+    text-align: center;
+    margin-top: 8px;
+    padding: 14px 20px;
   }
 
   .nav-toggle.active .hamburger:nth-child(1) {
@@ -2725,11 +2810,16 @@ input, textarea, select {
   .hc-sub-nav {
     gap: 8px;
     padding: 12px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
   }
 
   .hc-tab {
     padding: 10px 16px;
     font-size: 0.9rem;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .rooms-grid {
@@ -2842,6 +2932,23 @@ input, textarea, select {
   .donate-card p {
     font-size: 0.85rem;
   }
+
+  /* Health Centre Hero Banner - Tablet */
+  .hc-hero-image {
+    height: 350px;
+  }
+
+  .hc-hero-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .hc-hero-content p {
+    font-size: 1rem;
+  }
+
+  .hc-hero-overlay {
+    padding: 32px 24px 24px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2925,11 +3032,17 @@ input, textarea, select {
   .hc-sub-nav {
     gap: 6px;
     padding: 10px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
   }
 
   .hc-tab {
-    padding: 8px 12px;
+    padding: 10px 14px;
     font-size: 0.85rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: fit-content;
   }
 
   .donate-grid {
@@ -2950,5 +3063,81 @@ input, textarea, select {
 
   .donate-card p {
     font-size: 0.8rem;
+  }
+
+  /* Health Centre Hero Banner - Mobile */
+  .hc-hero-image {
+    height: 280px;
+  }
+
+  .hc-hero-content h3 {
+    font-size: 1.3rem;
+  }
+
+  .hc-hero-content p {
+    font-size: 0.9rem;
+  }
+
+  .hc-hero-overlay {
+    padding: 24px 16px 20px;
+  }
+
+  /* Better mobile nav touch targets */
+  .nav-toggle {
+    padding: 8px;
+  }
+
+  .hamburger {
+    width: 26px;
+    height: 3px;
+  }
+
+  .nav-links {
+    width: 90%;
+    max-width: 300px;
+    padding: 72px 20px 20px;
+  }
+
+  .nav-link {
+    padding: 14px 16px;
+    font-size: 1.05rem;
+  }
+
+  /* Quick info bar - horizontal scroll on small mobile */
+  .quick-info-grid {
+    grid-template-columns: repeat(4, 280px);
+    gap: 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .quick-info-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .quick-info-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    min-width: 260px;
+  }
+
+  .qi-icon {
+    font-size: 1.5rem;
+  }
+
+  /* Better footer on small screens */
+  .footer-grid {
+    gap: 24px;
+  }
+
+  .footer-heading {
+    font-size: 1rem;
+  }
+
+  .footer-links a {
+    font-size: 0.9rem;
+    padding: 4px 0;
   }
 }

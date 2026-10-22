@@ -3,6 +3,7 @@ const navbar = document.getElementById('navbar') as HTMLElement;
 const navToggle = document.getElementById('nav-toggle') as HTMLElement;
 const navLinks = document.getElementById('nav-links') as HTMLElement;
 const navLinkElements = document.querySelectorAll('.nav-link');
+const navOverlay = document.getElementById('nav-overlay') as HTMLElement;
 
 // Scroll effect for navbar
 window.addEventListener('scroll', () => {
@@ -15,17 +16,45 @@ window.addEventListener('scroll', () => {
 });
 
 // Mobile menu toggle
+function openMobileMenu() {
+  navToggle.classList.add('active');
+  navLinks.classList.add('open');
+  if (navOverlay) navOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileMenu() {
+  navToggle.classList.remove('active');
+  navLinks.classList.remove('open');
+  if (navOverlay) navOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
 navToggle.addEventListener('click', () => {
-  navToggle.classList.toggle('active');
-  navLinks.classList.toggle('open');
+  if (navLinks.classList.contains('open')) {
+    closeMobileMenu();
+  } else {
+    openMobileMenu();
+  }
 });
+
+// Close mobile menu on overlay click
+if (navOverlay) {
+  navOverlay.addEventListener('click', closeMobileMenu);
+}
 
 // Close mobile menu on link click
 navLinkElements.forEach(link => {
   link.addEventListener('click', () => {
-    navToggle.classList.remove('active');
-    navLinks.classList.remove('open');
+    closeMobileMenu();
   });
+});
+
+// Close mobile menu on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+    closeMobileMenu();
+  }
 });
 
 // ===== Smooth Scroll for anchor links (within-page) =====
